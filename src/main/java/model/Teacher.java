@@ -2,7 +2,6 @@ package model;
 
 import enums.AcademicDegreeEnum;
 import generator.DateGenerator;
-import generator.DegreeGenerator;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import model.holder.TeachersHolder;
@@ -18,7 +17,7 @@ public class Teacher extends Person {
 
     public Teacher() {
         super();
-        academicDegree = DegreeGenerator.getRandom();
+        academicDegree = AcademicDegreeEnum.getRandom();
         hireDate = DateGenerator.getRandomHireDate();
         TeachersHolder.addTeacher(this);
     }

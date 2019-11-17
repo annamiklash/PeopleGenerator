@@ -2,6 +2,7 @@ package model;
 
 import com.github.javafaker.Faker;
 import enums.NationalityEnum;
+import enums.SexEnum;
 import generator.DateGenerator;
 import generator.PeselGenerator;
 import lombok.EqualsAndHashCode;
@@ -22,6 +23,7 @@ public abstract class Person implements Comparable<Person> {
     private final String firstName;
     private final String lastName;
     private final LocalDate birthDate;
+    private final SexEnum sex;
     private final String pesel;
     private final NationalityEnum nationality;
     private final Faker faker = new Faker();
@@ -31,6 +33,7 @@ public abstract class Person implements Comparable<Person> {
         lastName = faker.name().lastName();
         nationality = NationalityEnum.getRandom();
         birthDate = DateGenerator.getRandomBirthDate();
+        sex = SexEnum.getRandom();
         pesel = PeselGenerator.generatePesel(this);
         PersonsHolder.addPerson(this);
     }
@@ -39,7 +42,7 @@ public abstract class Person implements Comparable<Person> {
     public int compareTo(Person person) {
         final int compareResult = PL_COLLATOR.compare(lastName, person.getLastName());
         if (compareResult != 0) {
-            return  compareResult;
+            return compareResult;
         }
         return PL_COLLATOR.compare(firstName, person.firstName);
     }

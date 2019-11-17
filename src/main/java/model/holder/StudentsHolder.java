@@ -3,10 +3,7 @@ package model.holder;
 import lombok.Getter;
 import model.Student;
 
-import java.util.Iterator;
-import java.util.Locale;
-import java.util.Random;
-import java.util.TreeSet;
+import java.util.*;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
@@ -20,19 +17,20 @@ public class StudentsHolder {
         studentsSet.add(student);
     }
 
-    public static Student getStudentWithRandomIndex() {
-        final int randomIndex = random.nextInt(studentsSet.size());
-        Iterator<Student> studentIterator = studentsSet.iterator();
-        Student current = null;
-        int counter = 0;
-        while (studentIterator.hasNext()) {
-            current = studentIterator.next();
-            if (counter == randomIndex) {
-                return current;
+    public static List<Student> getRandomStudentsList(int expectedListSize) {
+        final Set<Student> studentSet = new HashSet<>();
+
+        final List<Student> allStudentList = new ArrayList<>(studentsSet);
+        int studentCount = 0;
+        while (studentCount != expectedListSize) {
+            final int randomIndex = random.nextInt(studentsSet.size());
+            final Student randomStudent = allStudentList.get(randomIndex);
+            if (!studentSet.contains(randomStudent)) {
+                studentSet.add(randomStudent);
+                studentCount++;
             }
-            counter++;
         }
-        return null;
+        return new ArrayList<>(studentSet);
     }
 
     public static TreeSet<Student> getStudentsSet() {

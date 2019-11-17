@@ -3,6 +3,7 @@ package test;
 import generator.PeselGenerator;
 import model.Person;
 import model.Student;
+import org.junit.Assert;
 import org.junit.Test;
 
 import java.util.ArrayList;
@@ -20,6 +21,8 @@ public class PeselGeneratorTest {
             Person person = new Student();
             final String pesel = PeselGenerator.generatePesel(person);
             System.out.println(i + " " + pesel);
+
+            Assert.assertEquals(12, pesel.length());
         }
 
     }
